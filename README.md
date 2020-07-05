@@ -1,5 +1,8 @@
-# e-system
-Work steps for execute frontend of E-System API:
+# About E-System project:
+E-System is a project do detalization and monitoring expenses. You can save cash receipt and send photo of him to system. E-System will process receipt and store info about it. You may get from system Excel report with detalisation your expenses.
+
+
+# Work steps for execute frontend of E-System API:
 
 0) Clone or download project
 1) Set right directory path in application.properties config
