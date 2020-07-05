@@ -1,0 +1,192 @@
+openapi: "3.0.2"
+
+info:
+  title: "E-System Backend API"
+  description: "E-System Backend API"
+  version: "1.0"
+
+  contact:
+    #    name: "Developed by Alexander Leonov"
+    url: "https://github.com/alexandr-leonov"
+    email: "as.leonov17@gmail.com"
+
+servers:
+  - url: http://localhost:{port}/api/{version}/
+    description: Local server
+    variables:
+      port:
+        enum:
+          - "8080"
+          - "9600"
+        default: "9600"
+      version:
+        enum:
+          - v1
+          - v2
+        default: v1
+
+#
+#endpoints
+#
+#endpoint
+paths:
+  #
+  # Static
+
+  /static:
+    description: Методы загрузки/отображения файлов
+    get:
+      summary: Метод отображения файла
+      tags:
+        - static
+      description: Метод для отображения файла, хранящегося на сервере. Если файл на сервере существует и доступен
+      operationId: getFile
+      parameters:
+        - $ref: '#/components/parameters/filename'
+      responses:
+        200:
+          description: "Отображение файла"
+          content:
+            image/*:
+              schema:
+                type: object
+                format: binary
+        400:
+          $ref: '#/components/responses/400'
+        500:
+          $ref: '#/components/responses/500'
+    post:
+      summary: Метод загрузки файла
+      tags:
+        - static
+      description: Метод для загрузки файла на сервер. Если расширение верно и загрузка удачна, то возвращает ссылку, по которой файл будет доступен для операций.
+      operationId: uploadFile
+      requestBody:
+        description: Attached File
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                filename:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: Объект Response, содержащий в себе ссылку на файл
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/link_to_file'
+        400:
+          $ref: '#/components/responses/400'
+        500:
+          $ref: '#/components/responses/500'
+
+#define components
+components:
+
+
+  #------------------------------------------------------------#
+  responses:
+  #------------------------------------------------------------#
+
+    200:
+      description: Успешный ответ
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/general_response'
+
+    400:
+      description: Ответ с ошибкой 400, возвращеется объект с кодом и описанием ошибки
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/general_response'
+
+    500:
+      description: Ответ с ошибкой 500, возвращеется объект с кодом и описанием ошибки
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/general_response'
+
+  #------------------------------------------------------------#
+  parameters:
+  #------------------------------------------------------------#
+
+    filename:
+      in: query
+      name: filename
+      required: false
+      schema:
+        type: string
+        example: test.jpg
+  #------------------------------------------------------------#
+  schemas:
+  #------------------------------------------------------------#
+
+    general_response:
+      type: object
+      required:
+      - data
+      - error
+      properties:
+        data:
+          title: "data"
+          type: object
+        error:
+          title: "error"
+          type: object
+          properties:
+                code:
+                  title: "code"
+                  type: integer
+                  example: 400
+                type:
+                  title: "type"
+                  type: string
+                  example: "validation_error"
+                title:
+                  title: "title"
+                  type: string
+                  example: "Указаны неверные данные"
+                invalid_params:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/error_param"
+    #
+    # Error models
+
+    error_param:
+      type: object
+      required:
+        - name
+        - reason
+        - title
+      properties:
+        name:
+          title: "name"
+          type: string
+          example: "age"
+        reason:
+          title: "reason"
+          type: string
+          example: "must be integer between 18 (inclusive) and 100 (inclusive)"
+        title:
+          title: "title"
+          type: string
+          example: "Вы должны быть старше 18 лет"
+
+    link_to_file:
+      type: object
+      properties:
+        type:
+          title: "type"
+          type: string
+          example: "link"
+        value:
+          title: "value"
+          type: string
+          example: "http://localhost:9600/api/v1/static?filename=test.jpg"
