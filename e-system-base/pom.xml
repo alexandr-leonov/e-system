@@ -2,7 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <parent>
         <artifactId>e-system</artifactId>
         <groupId>com.esystem.solution</groupId>
@@ -10,24 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>e-system-ocr</artifactId>
+    <artifactId>e-system-base</artifactId>
 
     <properties>
         <kotlin.version>1.3.72</kotlin.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.esystem.solution</groupId>
-            <artifactId>e-system-base</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/net.sourceforge.tess4j/tess4j -->
-        <dependency>
-            <groupId>net.sourceforge.tess4j</groupId>
-            <artifactId>tess4j</artifactId>
-            <version>4.5.1</version>
-        </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
@@ -70,6 +58,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

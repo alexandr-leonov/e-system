@@ -1,6 +1,6 @@
 package com.esystem.solution
 
-import com.esystem.solution.service.web.StaticService
+import com.esystem.solution.appender.file.StaticService
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -34,7 +34,7 @@ class StaticServiceTest {
     @Test
     fun uploadFile() {
         try {
-            StepVerifier.create(staticService.uploadFile(object {} as FilePart, "link", "")
+            StepVerifier.create(staticService.uploadFile("",object {} as FilePart, "link", "")
                     .onErrorResume { e ->
                         e is Exception
                         Mono.error(Throwable())

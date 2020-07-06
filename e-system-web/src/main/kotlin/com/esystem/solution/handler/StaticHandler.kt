@@ -1,10 +1,10 @@
 package com.esystem.solution.handler
 
+import com.esystem.solution.appender.file.StaticService
 import com.esystem.solution.conf.StaticProperties
 import com.esystem.solution.model.CommonError
-import com.esystem.solution.model.CommonExchange
 import com.esystem.solution.model.CommonWrongParam
-import com.esystem.solution.service.web.StaticService
+import com.esystem.solution.proxy.CommonExchange
 import org.apache.commons.io.FilenameUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -42,7 +42,7 @@ class StaticHandler @Autowired constructor(val staticProperties: StaticPropertie
                             Collections.singletonList(CommonWrongParam(PARAMETER_NAME,
                                     "Некорректное расширение файла",
                                     PARAMETER_NAME + " задан некорректно"))))
-                else staticService.uploadFile(filePart, request.exchange().getRequest().getURI().toString(), PARAMETER_NAME)
+                else staticService.uploadFile(staticProperties.directory, filePart, request.exchange().getRequest().getURI().toString(), PARAMETER_NAME)
                         .log("upload-file-response")
                         .flatMap(this::successResponse)
             }

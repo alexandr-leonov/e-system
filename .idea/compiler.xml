@@ -6,8 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="e-system-web" />
+        <module name="e-system-service" />
         <module name="e-system-ocr" />
+        <module name="e-system-web" />
+        <module name="e-system-base" />
       </profile>
     </annotationProcessing>
   </component>

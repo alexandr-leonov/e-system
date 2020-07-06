@@ -1,7 +1,7 @@
-package com.esystem.solution.service.impl
+package com.esystem.solution.appender.impl
 
 import com.esystem.solution.model.TessLang
-import com.esystem.solution.service.TessService
+import com.esystem.solution.appender.TessAppender
 import net.sourceforge.tess4j.Tesseract
 import net.sourceforge.tess4j.TesseractException
 import org.springframework.stereotype.Service
@@ -10,7 +10,7 @@ import java.io.File
 
 
 @Service
-class TessServiceImpl : TessService {
+class TessAppenderImpl : TessAppender {
 
     override fun doOcr(tessdataPath: String, lang: TessLang, pathToImage: String): Mono<String> {
         val tesseract = Tesseract()

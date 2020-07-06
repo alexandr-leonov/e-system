@@ -11,6 +11,8 @@
     <modules>
         <module>e-system-web</module>
         <module>e-system-ocr</module>
+        <module>e-system-service</module>
+        <module>e-system-base</module>
     </modules>
 
     <dependencies>

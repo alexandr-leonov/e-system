@@ -21,7 +21,17 @@
     <dependencies>
 
         <dependency>
+            <artifactId>e-system-base</artifactId>
+            <groupId>com.esystem.solution</groupId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
             <artifactId>e-system-ocr</artifactId>
+            <groupId>com.esystem.solution</groupId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <artifactId>e-system-service</artifactId>
             <groupId>com.esystem.solution</groupId>
             <version>1.0</version>
         </dependency>

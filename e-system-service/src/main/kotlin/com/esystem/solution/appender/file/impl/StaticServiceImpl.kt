@@ -1,8 +1,7 @@
-package com.esystem.solution.service.impl
+package com.esystem.solution.appender.file.impl
 
-import com.esystem.solution.conf.StaticProperties
 import com.esystem.solution.model.CommonModel
-import com.esystem.solution.service.web.StaticService
+import com.esystem.solution.appender.file.StaticService
 import org.apache.commons.io.FilenameUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.InputStreamResource
@@ -14,7 +13,7 @@ import java.io.FileInputStream
 import java.io.FileNotFoundException
 
 @Service
-class StaticServiceImpl @Autowired constructor(private val staticProperties: StaticProperties) : StaticService {
+class StaticServiceImpl : StaticService {
 
     override fun getFile(file: File): Mono<Pair<InputStreamResource, String>> =
             if (file.exists()) {
@@ -23,8 +22,8 @@ class StaticServiceImpl @Autowired constructor(private val staticProperties: Sta
                 Mono.just(Pair(content, extension.toLowerCase()))
             } else Mono.error(FileNotFoundException("File not found"))
 
-    override fun uploadFile(filePart: FilePart, uri: String, paramName: String): Mono<CommonModel> {
-        filePart.transferTo(File(staticProperties.directory + "/" + filePart.filename()))
+    override fun uploadFile(directory: String, filePart: FilePart, uri: String, paramName: String): Mono<CommonModel> {
+        filePart.transferTo(File(directory + "/" + filePart.filename()))
         val resultLink = StringBuilder(uri)
                 .append("?")
                 .append(paramName)

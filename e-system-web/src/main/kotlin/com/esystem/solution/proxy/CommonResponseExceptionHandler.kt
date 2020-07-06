@@ -1,7 +1,6 @@
 package com.esystem.solution.proxy
 
 import com.esystem.solution.model.CommonError
-import com.esystem.solution.model.CommonExchange
 import org.springframework.beans.factory.ObjectProvider
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.web.ResourceProperties
